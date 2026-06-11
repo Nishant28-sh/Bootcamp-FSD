@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nimbus — Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background orbs -->
+  <div class="bg-layer" id="bgLayer">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">◎</span>
+      <span class="logo-text">Nimbus</span>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <span class="theme-icon" id="themeIcon">☾</span>
+    </button>
+  </header>
+
+  <!-- Main App -->
+  <main class="app-container">
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <h1 class="hero-title">What's the weather<br /><em>out there?</em></h1>
+      <div class="search-wrapper">
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+          <input
+            type="text"
+            id="cityInput"
+            class="search-input"
+            placeholder="Enter a city name…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="search-btn" id="searchBtn" aria-label="Search">
+            <span class="btn-label">Search</span>
+            <span class="btn-spinner" id="btnSpinner" hidden></span>
+          </button>
+        </div>
+
+        <!-- Search History -->
+        <div class="history-row" id="historyRow" hidden>
+          <span class="history-label">Recent</span>
+          <div class="history-chips" id="historyChips"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error State -->
+    <div class="error-card" id="errorCard" hidden>
+      <span class="error-icon">⚠</span>
+      <div>
+        <p class="error-title" id="errorTitle">City not found</p>
+        <p class="error-sub" id="errorSub">Try checking the spelling or use a different city name.</p>
+      </div>
+    </div>
+
+    <!-- Weather Dashboard -->
+    <section class="dashboard" id="dashboard" hidden>
+
+      <!-- Hero Weather Card -->
+      <div class="weather-hero">
+        <div class="hero-left">
+          <div class="city-row">
+            <h2 class="city-name" id="cityName">—</h2>
+            <span class="country-badge" id="countryCode">—</span>
+          </div>
+          <p class="update-time" id="updateTime">—</p>
+          <div class="temp-display">
+            <span class="temp-main" id="tempMain">—</span>
+            <span class="temp-unit">°C</span>
+          </div>
+          <p class="condition-text" id="conditionText">—</p>
+          <p class="condition-desc" id="conditionDesc">—</p>
+        </div>
+        <div class="hero-right">
+          <div class="weather-icon-large" id="weatherIconLarge">☀️</div>
+          <div class="temp-range">
+            <span class="temp-min" id="tempMin">—</span>
+            <span class="range-divider">/</span>
+            <span class="temp-max" id="tempMax">—</span>
+          </div>
+          <p class="feels-like">Feels like <strong id="feelsLike">—</strong></p>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-icon">💧</span>
+          <span class="stat-value" id="humidity">—</span>
+          <span class="stat-label">Humidity</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">💨</span>
+          <span class="stat-value" id="windSpeed">—</span>
+          <span class="stat-label">Wind</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">⬆</span>
+          <span class="stat-value" id="pressure">—</span>
+          <span class="stat-label">Pressure</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">◎</span>
+          <span class="stat-value" id="visibility">—</span>
+          <span class="stat-label">Visibility</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🌅</span>
+          <span class="stat-value" id="sunrise">—</span>
+          <span class="stat-label">Sunrise</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🌇</span>
+          <span class="stat-value" id="sunset">—</span>
+          <span class="stat-label">Sunset</span>
+        </div>
+      </div>
+
+      <!-- 5-Day Forecast -->
+      <div class="forecast-section">
+        <h3 class="section-title">5-Day Forecast</h3>
+        <div class="forecast-row" id="forecastRow">
+          <!-- Forecast cards injected by JS -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Empty / Welcome State -->
+    <div class="welcome-state" id="welcomeState">
+      <div class="welcome-icon">🌤</div>
+      <p class="welcome-text">Search a city to see live weather</p>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
