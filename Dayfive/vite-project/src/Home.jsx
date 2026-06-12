@@ -1,9 +1,13 @@
-import React from 'react'
-
-const Home = () => {
+function Home() {
   return (
-    <div><h1>Home</h1></div>
-  )
+    <div className="page">
+      <h1>Home Page</h1>
+      <p>
+        Welcome to our React application. This is the
+        homepage of the website.
+      </p>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
