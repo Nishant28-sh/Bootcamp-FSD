@@ -4,7 +4,11 @@ const FormHandling = () => {
     const[name,setName]=useState('');
 
     const handleChange=(e)=>{
-       setName(e.target.value);
+        console.log(e);
+        let value=e.target.value;
+        let name=e.target.name;
+        setName(value);
+
       
     }
   return (
