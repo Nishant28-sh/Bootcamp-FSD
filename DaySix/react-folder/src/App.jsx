@@ -1,25 +1,48 @@
 import React, { useState } from 'react';
-import Home from './Home'
+import Home from './Home';
+import FormHandling from './FormHandling';
 
 const App = () => {
-  // const count = 0;
+  const [count, setCount] = useState(0);
 
-  const[count, setCount] = useState(0);
+  const handleIncrement = () => {
+    console.log("Increment Button Clicked");
+    setCount(prevCount => prevCount + 1);
+  };
 
-  const handleClick = () => {
-    console.log("Button Clicked");
-      // count = count+1;
-      setCount(count + 1);
-      
-  }
+  const handleDecrement = () => {
+    console.log("Decrement Button Clicked");
+    setCount(prevCount => prevCount - 1);
+  };
+
+  const handleReset = () => {
+    console.log("Reset Button Clicked");
+    setCount(0);
+  };
+
   return (
     <>
-    <div>App</div>
-    <h1>{count}</h1>
-    <button onClick={handleClick}>Click</button>
-    <Home />
-    </>
-  )
-}
+      <div>App</div>
 
-export default App
+      <h1>{count}</h1>
+
+      <button onClick={handleIncrement}>
+        Increment
+      </button>
+
+      <button onClick={handleDecrement}>
+        Decrement
+      </button>
+
+      <button onClick={handleReset}>
+        Reset
+      </button>
+
+      <Home />
+      <FormHandling />
+
+    </>
+  );
+};
+
+export default App;
