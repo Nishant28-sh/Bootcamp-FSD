@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 //import UseEffectOne from './UseEffectOne'
 //import Timer from './Timer'
-import WindowResize from './WindowResize'
+//import WindowResize from './WindowResize'
+import Routing from './Routing'
 
 const App = () => {
   return (
@@ -9,7 +10,8 @@ const App = () => {
     <div>
       {/* <UseEffectOne /> */}
       {/* <Timer /> */}
-      <WindowResize />
+      {/* <WindowResize /> */}
+      <Routing />
 
     </div>
     
