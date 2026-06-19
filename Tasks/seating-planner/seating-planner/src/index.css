@@ -1,0 +1,129 @@
+/* ============================================
+   Design tokens
+   ============================================ */
+:root {
+  /* Surfaces */
+  --paper: #faf8f4;
+  --paper-raised: #ffffff;
+  --paper-sunken: #f1eee6;
+  --line: #e3ddd0;
+  --line-strong: #d2c9b8;
+
+  /* Ink */
+  --ink: #1c1b19;
+  --ink-soft: #5b5650;
+  --ink-faint: #948e84;
+
+  /* Accent: brass — primary interactive / selection */
+  --brass: #9c7a3c;
+  --brass-deep: #7d6029;
+  --brass-tint: #f3ead7;
+  --brass-tint-strong: #e9d9b8;
+
+  /* Sage — assigned / success */
+  --sage: #6f8a63;
+  --sage-deep: #56714b;
+  --sage-tint: #e7eee2;
+
+  /* Terracotta — conflict / warning only */
+  --terracotta: #b65c3f;
+  --terracotta-tint: #f5e3da;
+
+  /* Type */
+  --font-display: 'Fraunces', 'Iowan Old Style', serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Shape & shadow */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-card: 0 1px 2px rgba(28, 27, 25, 0.04), 0 4px 12px rgba(28, 27, 25, 0.05);
+  --shadow-float: 0 8px 24px rgba(28, 27, 25, 0.10), 0 2px 6px rgba(28, 27, 25, 0.06);
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Scrollbars: quiet, not default chrome ugliness */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduced motion respected globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
