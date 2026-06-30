@@ -32,3 +32,12 @@ db.user.find()
 
 
 db.user.find({branch:"CSE"})
+db.user.findOne({ name: "Nishant" })
+
+db.user.updateOne({ name: "Rahul" },{$set: {branch: "CSE"}})
+db.user.findOne({ name: "Rahul" })
+db.user.deleteOne({
+  name: "Priya"
+})
+
+db.user.find()

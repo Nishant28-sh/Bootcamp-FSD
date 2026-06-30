@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-const API = 'http://localhost:8888/pages'
+const API = 'https://bootcamp-fsd-1.onrender.com'
 
 // ── SVG Icons ────────────────────────────────────────────
 const IconMail = () => (
