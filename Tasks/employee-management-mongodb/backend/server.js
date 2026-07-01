@@ -3,7 +3,6 @@ require("dotenv").config();
 
 const express  = require("express");
 const cors     = require("cors");
-const path     = require("path");
 
 const connectDB            = require("./config/db");
 const config               = require("./config/appConfig");
@@ -13,6 +12,7 @@ const loggerMiddleware     = require("./middleware/loggerMiddleware");
 const app = express();
 
 // ── CORS ─────────────────────────────────────────────────────────────────────
+// Frontend is deployed on Vercel — allow its origin via CORS_ORIGIN env var
 app.use(cors({
   origin:         config.corsOrigin,
   methods:        ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -24,33 +24,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(loggerMiddleware);
 
+// ── Health Check ──────────────────────────────────────────────────────────────
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Employee Management API is running",
+    version: "1.0.0",
+    env: config.env,
+  });
+});
+
 // ── API Routes ────────────────────────────────────────────────────────────────
 app.use("/employees", employeeRoutes);
 
-// ── Serve React Frontend (production) ─────────────────────────────────────────
-const frontendDist = path.join(__dirname, "../frontend/dist");
-
-if (config.env === "production") {
-  app.use(express.static(frontendDist));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(frontendDist, "index.html"));
-  });
-} else {
-  // Dev: simple health check
-  app.get("/", (req, res) => {
-    res.json({
-      success: true,
-      message: "Employee Management API is running (dev)",
-      version: "1.0.0",
-    });
-  });
-
-  // 404 for unknown API routes in dev
-  app.use((req, res) => {
-    res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
-  });
-}
+// ── 404 Handler ───────────────────────────────────────────────────────────────
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
+});
 
 // ── Global Error Handler ──────────────────────────────────────────────────────
 app.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
@@ -63,11 +53,6 @@ connectDB().then(() => {
   app.listen(config.port, () => {
     console.log(`\x1b[32m✓\x1b[0m Server running on \x1b[36mhttp://localhost:${config.port}\x1b[0m`);
     console.log(`\x1b[32m✓\x1b[0m API:      \x1b[36mhttp://localhost:${config.port}/employees\x1b[0m`);
-    if (config.env === "production") {
-      console.log(`\x1b[32m✓\x1b[0m Frontend: \x1b[36mhttp://localhost:${config.port}\x1b[0m`);
-    } else {
-      console.log(`\x1b[33m→\x1b[0m Frontend dev server: \x1b[36mhttp://localhost:5173\x1b[0m`);
-    }
   });
 });
 
