@@ -1,12 +1,22 @@
 /**
  * Centralized application configuration.
  * All values are sourced from environment variables loaded by dotenv.
+ *
+ * CORS_ORIGIN supports a comma-separated list of allowed origins, e.g.:
+ *   CORS_ORIGIN=https://myapp.vercel.app,https://myapp.onrender.com
  */
+
+// Parse comma-separated origins into an array (or keep as a string for single origin)
+const rawOrigins = process.env.CORS_ORIGIN || "http://localhost:5173";
+const corsOrigin = rawOrigins.includes(",")
+  ? rawOrigins.split(",").map((o) => o.trim())
+  : rawOrigins;
+
 const config = {
   env:         process.env.NODE_ENV      || "development",
   port:        parseInt(process.env.PORT || "5000", 10),
   mongoUri:    process.env.MONGODB_URI,
-  corsOrigin:  process.env.CORS_ORIGIN   || "http://localhost:5173",
+  corsOrigin,
   jwt: {
     secret:    process.env.JWT_SECRET    || "changeme",
     expiresIn: process.env.JWT_EXPIRES_IN || "7d",
