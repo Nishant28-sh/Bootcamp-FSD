@@ -7,10 +7,11 @@
  */
 
 // Parse comma-separated origins into an array (or keep as a string for single origin)
-const rawOrigins = process.env.CORS_ORIGIN || "http://localhost:5173";
+// Accepts both CORS_ORIGIN and CORS_ORIGIN_PROD env var names, and strips trailing slashes
+const rawOrigins = (process.env.CORS_ORIGIN || process.env.CORS_ORIGIN_PROD || "http://localhost:5173").trim();
 const corsOrigin = rawOrigins.includes(",")
-  ? rawOrigins.split(",").map((o) => o.trim())
-  : rawOrigins;
+  ? rawOrigins.split(",").map((o) => o.trim().replace(/\/+$/, ""))
+  : rawOrigins.replace(/\/+$/, "");
 
 const config = {
   env:         process.env.NODE_ENV      || "development",
